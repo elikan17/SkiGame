@@ -38,6 +38,6 @@ public class GameManager : MonoBehaviour
     {
         if(racing)
             raceTime = DateTime.Now - raceStart;
-        Debug.Log("race time: " + raceTime);
+        Debug.Log("race time: " + raceTime.ToString("mm':'ss'.'ff"));
     }
 }
