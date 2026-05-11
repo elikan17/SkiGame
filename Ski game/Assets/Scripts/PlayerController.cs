@@ -12,18 +12,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float disableTime = 0.7f;
     private float lastDisableTime;
     Rigidbody rb;
+    public static Transform playerPos;
     
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    void Awake()
     {
         move = InputSystem.actions.FindAction("Move");
         rb = GetComponent<Rigidbody>();
+        playerPos = transform;
     }
 
     private void OnEnable()
     {
         Obstacle.OnPlayerHit += TakeDamage;
+    }
+    
+    private void OnDisable()
+    {
+        Obstacle.OnPlayerHit -= TakeDamage;
     }
 
     void TakeDamage()
