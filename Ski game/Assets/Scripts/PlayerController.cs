@@ -13,12 +13,14 @@ public class PlayerController : MonoBehaviour
     private float lastDisableTime;
     Rigidbody rb;
     public static Transform playerPos;
+    private Animator anim;
     
 
     void Awake()
     {
         move = InputSystem.actions.FindAction("Move");
         rb = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
         playerPos = transform;
     }
 
@@ -60,6 +62,9 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(0, moveInput.x * rotationSpeed * Time.fixedDeltaTime, 0);
             //Debug.Log("move x : " + moveInput.x +  " move y : " + moveInput.y);
         }
+        
+        anim.SetBool("grounded", isGrounded);
+        anim.SetFloat("playerSpeed",  rb.linearVelocity.magnitude);
 
     }
 }
